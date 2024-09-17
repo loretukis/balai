@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procentų į balus konvertavimas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Procentų į balus konvertavimas</h1>
+    <label for="percentageInput">Įveskite procentus (nuo 1 iki 100):</label><br>
+    <input type="number" id="percentageInput" min="1" max="100"><br>
+    <button onclick="convertToPoints()">Konvertuoti</button>
+    <p id="result"></p>
+
+    <script>
+        function convertToPoints() {
+            const percentage = parseFloat(document.getElementById('percentageInput').value);
+            let points;
+
+            if (percentage >= 100) {
+                points = 70;
+            } else if (percentage >= 95) {
+                points = 63 + (percentage - 95) * (70 - 63) / (100 - 95);
+            } else if (percentage >= 90) {
+                points = 59 + (percentage - 90) * (63 - 59) / (95 - 90);
+            } else if (percentage >= 85) {
+                points = 54 + (percentage - 85) * (59 - 54) / (90 - 85);
+            } else if (percentage >= 84) {
+                points = 53 + (percentage - 84) * (54 - 53) / (85 - 84);
+            } else if (percentage >= 80) {
+                points = 50 + (percentage - 80) * (53 - 50) / (84 - 80);
+            } else if (percentage >= 75) {
+                points = 45 + (percentage - 75) * (50 - 45) / (80 - 75);
+            } else if (percentage >= 70) {
+                points = 41 + (percentage - 70) * (45 - 41) / (75 - 70);
+            } else if (percentage >= 65) {
+                points = 38 + (percentage - 65) * (41 - 38) / (70 - 65);
+            } else if (percentage >= 60) {
+                points = 36 + (percentage - 60) * (38 - 36) / (65 - 60);
+            } else if (percentage >= 55) {
+                points = 36;
+            } else if (percentage >= 54) {
+                points = 35 + (percentage - 54) * (36 - 35) / (55 - 54);
+            } else if (percentage >= 50) {
+                points = 31 + (percentage - 50) * (35 - 31) / (54 - 50);
+            } else if (percentage >= 45) {
+                points = 26 + (percentage - 45) * (31 - 26) / (50 - 45);
+            } else if (percentage >= 40) {
+                points = 22 + (percentage - 40) * (26 - 22) / (45 - 40);
+            } else if (percentage >= 35) {
+                points = 19 + (percentage - 35) * (22 - 19) / (40 - 35);
+            } else if (percentage >= 34) {
+                points = 18 + (percentage - 34) * (19 - 18) / (35 - 34);
+            } else if (percentage >= 30) {
+                points = 15 + (percentage - 30) * (18 - 15) / (34 - 30);
+            } else if (percentage >= 25) {
+                points = 11 + (percentage - 25) * (15 - 11) / (30 - 25);
+            } else if (percentage >= 20) {
+                points = 8 + (percentage - 20) * (11 - 8) / (25 - 20);
+            } else if (percentage >= 15) {
+                points = 5 + (percentage - 15) * (8 - 5) / (20 - 15);
+            } else if (percentage >= 10) {
+                points = 3 + (percentage - 10) * (5 - 3) / (15 - 10);
+            } else if (percentage >= 5) {
+                points = 1 + (percentage - 5) * (3 - 1) / (10 - 5);
+            } else {
+                points = 0;
+            }
+
+            document.getElementById('result').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} balų.`;
+        }
+    </script>
+</body>
+</html>
