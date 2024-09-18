@@ -17,15 +17,26 @@
     </style>
 </head>
 <body>
-    <h1>Procentų konvertavimas į balus</h1>
-    <label for="percentageInput">Įveskite procentus (nuo 1 iki 100):</label><br>
-    <input type="number" id="percentageInput" min="1" max="100"><br>
-    <button onclick="convertToPoints()">Konvertuoti</button>
-    <p id="result"></p>
+    <h1>Procentų į konvertavimas balus</h1>
+
+    <!-- Skaičiuoklė 70 balų sistemai -->
+    <label for="percentageInput70">Įveskite procentus (nuo 1 iki 100) 70 balų sistemai:</label><br>
+    <input type="number" id="percentageInput70" min="1" max="100"><br>
+    <button onclick="convertTo70Points()">Konvertuoti į 70 balų sistemą</button>
+    <p id="result70"></p>
+
+    <hr>
+
+    <!-- Skaičiuoklė 8 balų sistemai -->
+    <label for="percentageInput8">Įveskite procentus (nuo 1 iki 100) 8 balų sistemai:</label><br>
+    <input type="number" id="percentageInput8" min="1" max="100"><br>
+    <button onclick="convertTo8Points()">Konvertuoti į 8 balų sistemą</button>
+    <p id="result8"></p>
 
     <script>
-        function convertToPoints() {
-            const percentage = parseFloat(document.getElementById('percentageInput').value);
+        // Funkcija 70 balų sistemai
+        function convertTo70Points() {
+            const percentage = parseFloat(document.getElementById('percentageInput70').value);
             
             // Skaičiuojama pagal formulę: balai = procentai * 0.7
             let points = percentage * 0.7;
@@ -33,8 +44,22 @@
             // Apvalinimas iki artimiausio sveiko skaičiaus
             points = Math.round(points);
 
-            // Rezultatas atvaizduojamas be kablelio, nes apvalinta iki sveiko skaičiaus
-            document.getElementById('result').innerText = `Procentai: ${percentage}% atitinka ${points} bal.`;
+            // Rezultatas atvaizduojamas
+            document.getElementById('result70').innerText = `Procentai: ${percentage}% atitinka ${points} bal. (70 balų sistema).`;
+        }
+
+        // Funkcija 8 balų sistemai
+        function convertTo8Points() {
+            const percentage = parseFloat(document.getElementById('percentageInput8').value);
+            
+            // Skaičiuojama pagal formulę: balai = procentai * 0.08
+            let points = percentage * 0.08;
+            
+            // Apvalinimas iki artimiausio sveiko skaičiaus
+            points = Math.round(points);
+
+            // Rezultatas atvaizduojamas
+            document.getElementById('result8').innerText = `Procentai: ${percentage}% atitinka ${points} bal. (8 balų sistema).`;
         }
     </script>
 </body>
