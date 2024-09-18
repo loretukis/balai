@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procentų į balus konvertavimas</title>
+    <title>Procentai į balus</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1>Procentai į balus</h1>
+    <h1>Procentų konvertavimas į balus</h1>
     <label for="percentageInput">Įveskite procentus (nuo 1 iki 100):</label><br>
     <input type="number" id="percentageInput" min="1" max="100"><br>
     <button onclick="convertToPoints()">Konvertuoti</button>
@@ -28,10 +28,13 @@
             const percentage = parseFloat(document.getElementById('percentageInput').value);
             
             // Skaičiuojama pagal formulę: balai = procentai * 0.7
-            const points = percentage * 0.7;
+            let points = percentage * 0.7;
+            
+            // Apvalinimas iki artimiausio sveiko skaičiaus
+            points = Math.round(points);
 
-            // Rezultatas atvaizduojamas su dviem skaičiais po kablelio
-            document.getElementById('result').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} balų.`;
+            // Rezultatas atvaizduojamas be kablelio, nes apvalinta iki sveiko skaičiaus
+            document.getElementById('result').innerText = `Procentai: ${percentage}% atitinka ${points} balų.`;
         }
     </script>
 </body>
