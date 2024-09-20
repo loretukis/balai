@@ -41,11 +41,8 @@
             // Skaičiuojama pagal formulę: balai = procentai * 0.7
             let points = percentage * 0.7;
 
-            // Pridėta labai maža vertė (epsilon) siekiant išvengti netikslumų
-            points = Math.round(points + Number.EPSILON);
-
-            // Rezultatas atvaizduojamas
-            document.getElementById('result70').innerText = `Procentai: ${percentage}% atitinka ${points} bal. (70 balų sistema).`;
+            // Rezultatas atvaizduojamas su dviem skaičiais po kablelio
+            document.getElementById('result70').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} bal. (70 balų sistema).`;
         }
 
         // Funkcija 8 balų sistemai
@@ -55,11 +52,8 @@
             // Skaičiuojama pagal formulę: balai = procentai * 0.08
             let points = percentage * 0.08;
 
-            // Pridėta labai maža vertė (epsilon) siekiant išvengti netikslumų
-            points = Math.round(points + Number.EPSILON);
-
-            // Rezultatas atvaizduojamas
-            document.getElementById('result8').innerText = `Procentai: ${percentage}% atitinka ${points} bal. (8 balų sistema).`;
+            // Rezultatas atvaizduojamas su dviem skaičiais po kablelio
+            document.getElementById('result8').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} bal. (8 balų sistema).`;
         }
     </script>
 </body>
