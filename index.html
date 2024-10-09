@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procentai į balus</title>
+    <title>Procentų ir balų konvertavimas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ccc;
+            padding: 20px;
+            vertical-align: top;
         }
         input, button {
             padding: 10px;
@@ -17,43 +26,72 @@
     </style>
 </head>
 <body>
-    <h1>Procentų konvertavimas į balus</h1>
+    <table>
+        <tr>
+            <td><h1>Procentų konvertavimas į balus</h1></td>
+            <td><h1>Balų konvertavimas į procentus</h1></td>
+        </tr>
+        <tr>
+            <td>
+                <!-- Skaičiuoklė 70 balų sistemai -->
+                <label for="percentageInput70">Įveskite procentus (nuo 1 iki 100) 70 balų sistemai:</label><br>
+                <input type="number" id="percentageInput70" min="1" max="100"><br>
+                <button onclick="convertTo70Points()">Konvertuoti į 70 balų sistemą</button>
+                <p id="result70"></p>
 
-    <!-- Skaičiuoklė 70 balų sistemai -->
-    <label for="percentageInput70">Įveskite procentus (nuo 1 iki 100) 70 balų sistemai:</label><br>
-    <input type="number" id="percentageInput70" min="1" max="100"><br>
-    <button onclick="convertTo70Points()">Konvertuoti į 70 balų sistemą</button>
-    <p id="result70"></p>
+                <hr>
 
-    <hr>
+                <!-- Skaičiuoklė 8 balų sistemai -->
+                <label for="percentageInput8">Įveskite procentus (nuo 1 iki 100) 8 balų sistemai:</label><br>
+                <input type="number" id="percentageInput8" min="1" max="100"><br>
+                <button onclick="convertTo8Points()">Konvertuoti į 8 balų sistemą</button>
+                <p id="result8"></p>
+            </td>
+            <td>
+                <!-- Skaičiuoklė iš balų į procentus (70 balų sistema) -->
+                <label for="pointsInput70">Įveskite balus (nuo 1 iki 70) 70 balų sistemai:</label><br>
+                <input type="number" id="pointsInput70" min="1" max="70"><br>
+                <button onclick="convertToPercentage70()">Konvertuoti į procentus</button>
+                <p id="resultToPercentage70"></p>
 
-    <!-- Skaičiuoklė 8 balų sistemai -->
-    <label for="percentageInput8">Įveskite procentus (nuo 1 iki 100) 8 balų sistemai:</label><br>
-    <input type="number" id="percentageInput8" min="1" max="100"><br>
-    <button onclick="convertTo8Points()">Konvertuoti į 8 balų sistemą</button>
-    <p id="result8"></p>
+                <hr>
+
+                <!-- Skaičiuoklė iš balų į procentus (8 balų sistema) -->
+                <label for="pointsInput8">Įveskite balus (nuo 1 iki 8) 8 balų sistemai:</label><br>
+                <input type="number" id="pointsInput8" min="1" max="8"><br>
+                <button onclick="convertToPercentage8()">Konvertuoti į procentus</button>
+                <p id="resultToPercentage8"></p>
+            </td>
+        </tr>
+    </table>
 
     <script>
-        // Funkcija 70 balų sistemai
+        // Funkcija 70 balų sistemai (procentai į balus)
         function convertTo70Points() {
             const percentage = parseFloat(document.getElementById('percentageInput70').value);
-            
-            // Skaičiuojama pagal formulę: balai = procentai * 0.7
             let points = percentage * 0.7;
-
-            // Rezultatas atvaizduojamas su dviem skaičiais po kablelio
             document.getElementById('result70').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} bal.`;
         }
 
-        // Funkcija 8 balų sistemai
+        // Funkcija 8 balų sistemai (procentai į balus)
         function convertTo8Points() {
             const percentage = parseFloat(document.getElementById('percentageInput8').value);
-            
-            // Skaičiuojama pagal formulę: balai = procentai * 0.08
             let points = percentage * 0.08;
-
-            // Rezultatas atvaizduojamas su dviem skaičiais po kablelio
             document.getElementById('result8').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} bal.`;
+        }
+
+        // Funkcija 70 balų sistemai (balai į procentus)
+        function convertToPercentage70() {
+            const points = parseFloat(document.getElementById('pointsInput70').value);
+            let percentage = points / 0.7;
+            document.getElementById('resultToPercentage70').innerText = `Balai: ${points} atitinka ${percentage.toFixed(2)}% (70 balų sistema).`;
+        }
+
+        // Funkcija 8 balų sistemai (balai į procentus)
+        function convertToPercentage8() {
+            const points = parseFloat(document.getElementById('pointsInput8').value);
+            let percentage = points / 0.08;
+            document.getElementById('resultToPercentage8').innerText = `Balai: ${points} atitinka ${percentage.toFixed(2)}% (8 balų sistema).`;
         }
     </script>
 </body>
