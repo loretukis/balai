@@ -74,7 +74,7 @@
         </tr>
     </table>
 
-    <script>
+   <script>
     // Helper funkcija, kuri kablelį pakeičia tašku
     function parseInput(value) {
         return parseFloat(value.replace(',', '.')); // Pakeičia "," į "." ir konvertuoja į skaičių
@@ -160,6 +160,49 @@
         document.getElementById('result8ScaleScore').innerText = 
             `Įvertinimas balais (8 balų sistema): ${pointsIn8Scale.toFixed(2)} bal.`;
     }
+
+    // Funkcija, kuri sujungia "Enter" klavišo paspaudimą su atitinkamomis funkcijomis
+    function setupEnterKeyBindings() {
+        document.getElementById('percentageInput70').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                convertTo70Points();
+            }
+        });
+
+        document.getElementById('percentageInput8').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                convertTo8Points();
+            }
+        });
+
+        document.getElementById('pointsInput70').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                convertToPercentage70();
+            }
+        });
+
+        document.getElementById('pointsInput8').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                convertToPercentage8();
+            }
+        });
+
+        document.getElementById('pointsScored').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                convertPointsToPercentageAndScore();
+            }
+        });
+
+        document.getElementById('maxPoints').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                convertPointsToPercentageAndScore();
+            }
+        });
+    }
+
+    // Inicializacija, kai puslapis užkraunamas
+    window.onload = setupEnterKeyBindings;
 </script>
+
 </body>
 </html>
