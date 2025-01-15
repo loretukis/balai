@@ -75,55 +75,91 @@
     </table>
 
     <script>
-        // Funkcija procentų konvertavimui į 70 ir 8 balų sistemas
-        function convertToBothScales() {
-            const percentage = parseFloat(document.getElementById('percentageInput70').value);
-            
-            // Konvertavimas į 70 balų sistemą
-            let pointsIn70Scale = percentage * 0.7;
-            document.getElementById('result70').innerText = `Procentai: ${percentage}% atitinka ${pointsIn70Scale.toFixed(2)} bal. (70 balų sistema)`;
+    // Helper funkcija, kuri kablelį pakeičia tašku
+    function parseInput(value) {
+        return parseFloat(value.replace(',', '.')); // Pakeičia "," į "." ir konvertuoja į skaičių
+    }
 
-            // Konvertavimas į 8 balų sistemą
-            let pointsIn8Scale = percentage * 0.08;
-            document.getElementById('result8').innerText = `Procentai: ${percentage}% atitinka ${pointsIn8Scale.toFixed(2)} bal. (8 balų sistema)`;
+    // Funkcija 70 balų sistemai (procentai į balus)
+    function convertTo70Points() {
+        const percentageInput = document.getElementById('percentageInput70').value;
+        const percentage = parseInput(percentageInput);
+
+        if (isNaN(percentage) || percentage < 1 || percentage > 100) {
+            document.getElementById('result70').innerText = "Prašome įvesti galiojantį procentų skaičių (nuo 1 iki 100).";
+            return;
         }
 
-        // Funkcija 70 balų sistemai (balai į procentus)
-        function convertToPercentage70() {
-            const points = parseFloat(document.getElementById('pointsInput70').value);
-            let percentage = points / 0.7;
-            document.getElementById('resultToPercentage70').innerText = `Balai: ${points} atitinka ${percentage.toFixed(2)}% (70 balų sistema).`;
+        let points = percentage * 0.7;
+        document.getElementById('result70').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} bal.`;
+    }
+
+    // Funkcija 8 balų sistemai (procentai į balus)
+    function convertTo8Points() {
+        const percentageInput = document.getElementById('percentageInput8').value;
+        const percentage = parseInput(percentageInput);
+
+        if (isNaN(percentage) || percentage < 1 || percentage > 100) {
+            document.getElementById('result8').innerText = "Prašome įvesti galiojantį procentų skaičių (nuo 1 iki 100).";
+            return;
         }
 
-        // Funkcija 8 balų sistemai (balai į procentus)
-        function convertToPercentage8() {
-            const points = parseFloat(document.getElementById('pointsInput8').value);
-            let percentage = points / 0.08;
-            document.getElementById('resultToPercentage8').innerText = `Balai: ${points} atitinka ${percentage.toFixed(2)}% (8 balų sistema).`;
+        let points = percentage * 0.08;
+        document.getElementById('result8').innerText = `Procentai: ${percentage}% atitinka ${points.toFixed(2)} bal.`;
+    }
+
+    // Funkcija 70 balų sistemai (balai į procentus)
+    function convertToPercentage70() {
+        const pointsInput = document.getElementById('pointsInput70').value;
+        const points = parseInput(pointsInput);
+
+        if (isNaN(points) || points < 1 || points > 70) {
+            document.getElementById('resultToPercentage70').innerText = "Prašome įvesti galiojantį balų skaičių (nuo 1 iki 70).";
+            return;
         }
 
-        // Funkcija taškų konvertavimui į procentus ir balus
-        function convertPointsToPercentageAndScore() {
-            const pointsScored = parseFloat(document.getElementById('pointsScored').value);
-            const maxPoints = parseFloat(document.getElementById('maxPoints').value);
-            
-            if (maxPoints > 0) {
-                let percentage = (pointsScored / maxPoints) * 100;
-                let pointsIn70Scale = percentage * 0.7;
-                let pointsIn8Scale = percentage * 0.08;
+        let percentage = points / 0.7;
+        document.getElementById('resultToPercentage70').innerText = `Balai: ${points} atitinka ${percentage.toFixed(2)}% (70 balų sistema).`;
+    }
 
-                document.getElementById('resultPercentageScore').innerText = 
-                    `Įvertinimas procentais: ${percentage.toFixed(2)}%`;
-                document.getElementById('result70ScaleScore').innerText = 
-                    `Įvertinimas balais (70 balų sistema): ${pointsIn70Scale.toFixed(2)} bal.`;
-                document.getElementById('result8ScaleScore').innerText = 
-                    `Įvertinimas balais (8 balų sistema): ${pointsIn8Scale.toFixed(2)} bal.`;
-            } else {
-                document.getElementById('resultPercentageScore').innerText = "Prašome įvesti didesnį nei 0 maksimalų taškų skaičių.";
-                document.getElementById('result70ScaleScore').innerText = "";
-                document.getElementById('result8ScaleScore').innerText = "";
-            }
+    // Funkcija 8 balų sistemai (balai į procentus)
+    function convertToPercentage8() {
+        const pointsInput = document.getElementById('pointsInput8').value;
+        const points = parseInput(pointsInput);
+
+        if (isNaN(points) || points < 1 || points > 8) {
+            document.getElementById('resultToPercentage8').innerText = "Prašome įvesti galiojantį balų skaičių (nuo 1 iki 8).";
+            return;
         }
-    </script>
+
+        let percentage = points / 0.08;
+        document.getElementById('resultToPercentage8').innerText = `Balai: ${points} atitinka ${percentage.toFixed(2)}% (8 balų sistema).`;
+    }
+
+    // Funkcija taškų konvertavimui į procentus ir balus
+    function convertPointsToPercentageAndScore() {
+        const pointsScoredInput = document.getElementById('pointsScored').value;
+        const maxPointsInput = document.getElementById('maxPoints').value;
+
+        const pointsScored = parseInput(pointsScoredInput);
+        const maxPoints = parseInput(maxPointsInput);
+
+        if (isNaN(pointsScored) || isNaN(maxPoints) || maxPoints <= 0) {
+            document.getElementById('resultPercentageScore').innerText = "Prašome įvesti galiojančius taškų skaičius.";
+            return;
+        }
+
+        let percentage = (pointsScored / maxPoints) * 100;
+        let pointsIn70Scale = percentage * 0.7;
+        let pointsIn8Scale = percentage * 0.08;
+
+        document.getElementById('resultPercentageScore').innerText = 
+            `Įvertinimas procentais: ${percentage.toFixed(2)}%`;
+        document.getElementById('result70ScaleScore').innerText = 
+            `Įvertinimas balais (70 balų sistema): ${pointsIn70Scale.toFixed(2)} bal.`;
+        document.getElementById('result8ScaleScore').innerText = 
+            `Įvertinimas balais (8 balų sistema): ${pointsIn8Scale.toFixed(2)} bal.`;
+    }
+</script>
 </body>
 </html>
